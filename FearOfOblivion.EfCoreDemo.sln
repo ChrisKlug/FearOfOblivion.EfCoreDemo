@@ -1,0 +1,36 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30907.101
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FearOfOblivion.EfCoreDemo", "src\FearOfOblivion.EfCoreDemo\FearOfOblivion.EfCoreDemo.csproj", "{2DA9696F-A9A4-4D69-AF6E-932FD1C33474}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FearOfOblivion.EfCoreDemo.Tests", "tests\FearOfOblivion.EfCoreDemo.Tests\FearOfOblivion.EfCoreDemo.Tests.csproj", "{0121DB1A-F8CA-49AD-BE70-E1EDFFF23FF8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data", "Data", "{D6DC7024-D0C3-45E5-978E-9547BDE4E3A3}"
+	ProjectSection(SolutionItems) = preProject
+		Data\EfCoreDemo.mdf = Data\EfCoreDemo.mdf
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2DA9696F-A9A4-4D69-AF6E-932FD1C33474}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2DA9696F-A9A4-4D69-AF6E-932FD1C33474}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2DA9696F-A9A4-4D69-AF6E-932FD1C33474}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2DA9696F-A9A4-4D69-AF6E-932FD1C33474}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0121DB1A-F8CA-49AD-BE70-E1EDFFF23FF8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0121DB1A-F8CA-49AD-BE70-E1EDFFF23FF8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0121DB1A-F8CA-49AD-BE70-E1EDFFF23FF8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0121DB1A-F8CA-49AD-BE70-E1EDFFF23FF8}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {9ECC78F8-0FD6-4762-BF9A-F44A8EBCD015}
+	EndGlobalSection
+EndGlobal
