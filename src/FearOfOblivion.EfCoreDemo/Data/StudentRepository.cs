@@ -10,7 +10,7 @@ namespace FearOfOblivion.EfCoreDemo.Data
     {
         public StudentRepository(SchoolContext context)
         {
-            Students = context.Set<Student>().Include("classes.Class.Teacher");
+            Students = context.Set<Student>().Include(x => x.Classes);
         }
 
         public Task<Student> WithId(int id)
@@ -30,7 +30,7 @@ namespace FearOfOblivion.EfCoreDemo.Data
         public Task<Student[]> InClass(string className)
         {
             return Students
-                        .Where(x => EF.Property<List<StudentClass>>(x, "classes").Any(x => x.Class.Name == className))
+                        .Where(x => x.Classes.Any(x => x.Name == className))
                         .ToArrayAsync();
         }
 

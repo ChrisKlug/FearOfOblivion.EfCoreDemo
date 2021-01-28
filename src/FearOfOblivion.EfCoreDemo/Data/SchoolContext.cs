@@ -1,5 +1,6 @@
 ﻿using FearOfOblivion.EfCoreDemo.Data.Entities;
 using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
 
 namespace FearOfOblivion.EfCoreDemo.Data
 {
@@ -11,15 +12,6 @@ namespace FearOfOblivion.EfCoreDemo.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<StudentClass>(x =>
-            {
-                x.HasOne(x => x.Class).WithMany().HasForeignKey("ClassId");
-                x.HasOne(x => x.Student).WithMany("classes").HasForeignKey("StudentId");
-
-                x.HasKey("StudentId", "ClassId");
-                x.ToTable("StudentClasses");
-            });
-
             modelBuilder.Entity<Student>(x =>
             {
                 x.Property(x => x.StudentId).HasConversion(x => x.ToString(), x => new StudentId(x));
@@ -32,22 +24,33 @@ namespace FearOfOblivion.EfCoreDemo.Data
                 x.ToTable("Students");
             });
 
+            modelBuilder.Entity<Class>(x =>
+            {
+                x.Property("id").HasColumnName("Id").UseIdentityColumn();
+
+                x.HasMany<Student>("students").WithMany(x => x.Classes)
+                                            .UsingEntity<Dictionary<string, object>>(
+                                                "StudentClasses",
+                                                x => x.HasOne<Student>()
+                                                        .WithMany()
+                                                        .HasForeignKey("StudentId"),
+                                                x => x.HasOne<Class>()
+                                                        .WithMany()
+                                                        .HasForeignKey("ClassId")
+                                            );
+
+                x.HasOne(x => x.Teacher).WithMany().HasForeignKey("TeacherId");
+
+                x.HasKey("id");
+                x.ToTable("Classes");
+            });
+
             modelBuilder.Entity<Teacher>(x =>
             {
                 x.Property("id").HasColumnName("Id").UseIdentityColumn();
 
                 x.HasKey("id");
                 x.ToTable("Teachers");
-            });
-
-            modelBuilder.Entity<Class>(x =>
-            {
-                x.Property("id").HasColumnName("Id").UseIdentityColumn();
-
-                x.HasOne(x => x.Teacher).WithMany().HasForeignKey("TeacherId");
-
-                x.HasKey("id");
-                x.ToTable("Classes");
             });
         }
     }
