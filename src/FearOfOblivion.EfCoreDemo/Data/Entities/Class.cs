@@ -1,8 +1,11 @@
-﻿namespace FearOfOblivion.EfCoreDemo.Data.Entities
+﻿using System.Collections.Generic;
+
+namespace FearOfOblivion.EfCoreDemo.Data.Entities
 {
     public class Class
     {
         private int? id;
+        private ICollection<Student> students;
 
         protected Class() { }
 
