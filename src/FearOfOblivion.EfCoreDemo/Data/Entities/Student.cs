@@ -1,20 +1,33 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace FearOfOblivion.EfCoreDemo.Data.Entities
 {
     public class Student
     {
-        public Student(string studentId, string firstName, string lastName)
+        private int? id;
+        private List<StudentClass> classes = new ();
+
+        protected Student() { }
+
+        public static Student Create(string studentId, string firstName, string lastName)
         {
-            StudentId = studentId;
-            FirstName = firstName;
-            LastName = lastName;
+            return new Student
+            {
+                StudentId = studentId,
+                FirstName = firstName,
+                LastName = lastName,
+            };
         }
 
-        public int Id { get; private set; }
+        public void AddClass(Class @class)
+        {
+            classes.Add(new StudentClass { Student = this, Class = @class });
+        }
+
         public string StudentId { get; private set; }
         public string FirstName { get; private set; }
         public string LastName { get; private set; }
-        public IList<StudentClass> Classes { get; private set; } = new List<StudentClass>();
+        public IReadOnlyList<Class> Classes => classes.Select(x => x.Class).ToList().AsReadOnly();
     }
 }

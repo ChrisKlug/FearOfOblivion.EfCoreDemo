@@ -7,22 +7,29 @@ namespace FearOfOblivion.EfCoreDemo.Tests.Extensions
     {
         public static int AddSeedData(this SchoolContext context)
         {
-            var chris = new Student("CK001", "Chris", "Klug");
 
-            var jane = new Teacher("Jane", "Smith");
-            var johan = new Teacher("Johan", "Olsson");
+            var jane = Teacher.Create("Jane", "Smith");
+            var johan = Teacher.Create("Johan", "Olsson");
 
-            var english = new Class("English 101", jane);
-            var swedish = new Class("Swedish 101", johan);
+            var english = Class.Create("English 101", jane);
+            var swedish = Class.Create("Swedish 101", johan);
 
-            chris.Classes.Add(new StudentClass { Student = chris, Class = english });
-            chris.Classes.Add(new StudentClass { Student = chris, Class = swedish });
+            context.Set<Class>().AddRange(english, swedish);
+
+            // Have to be saved first to give classes Ids
+            // Otherwise adding the classes fails as it can't track
+            // multiple StudentClass instances without Ids set for either
+            context.SaveChanges();
+
+            var chris = Student.Create("CK001", "Chris", "Klug");
+            chris.AddClass(english);
+            chris.AddClass(swedish);
 
             context.Set<Student>().Add(chris);
 
             context.SaveChanges();
 
-            return chris.Id;
+            return chris.GetPrivateValue<int>("id");
         }
     }
 }

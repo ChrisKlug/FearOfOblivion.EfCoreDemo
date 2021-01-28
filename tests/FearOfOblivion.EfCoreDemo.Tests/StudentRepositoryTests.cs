@@ -9,6 +9,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Threading.Tasks;
 using Xunit;
+using System.Linq;
 
 namespace FearOfOblivion.EfCoreDemo.Tests
 {
@@ -69,15 +70,15 @@ namespace FearOfOblivion.EfCoreDemo.Tests
             Assert.NotNull(student);
             Assert.NotNull(student.Classes);
 
-            var english = Assert.Single(student.Classes, x => x.Class.Name == "English 101");
-            Assert.NotNull(english.Class.Teacher);
-            Assert.Equal("Jane", english.Class.Teacher.FirstName);
-            Assert.Equal("Smith", english.Class.Teacher.LastName);
+            var english = Assert.Single(student.Classes, x => x.Name == "English 101");
+            Assert.NotNull(english.Teacher);
+            Assert.Equal("Jane", english.Teacher.FirstName);
+            Assert.Equal("Smith", english.Teacher.LastName);
 
-            var swedish = Assert.Single(student.Classes, x => x.Class.Name == "Swedish 101");
-            Assert.NotNull(swedish.Class.Teacher);
-            Assert.Equal("Johan", swedish.Class.Teacher.FirstName);
-            Assert.Equal("Olsson", swedish.Class.Teacher.LastName);
+            var swedish = Assert.Single(student.Classes, x => x.Name == "Swedish 101");
+            Assert.NotNull(swedish.Teacher);
+            Assert.Equal("Johan", swedish.Teacher.FirstName);
+            Assert.Equal("Olsson", swedish.Teacher.LastName);
         }
 
         public void Dispose()

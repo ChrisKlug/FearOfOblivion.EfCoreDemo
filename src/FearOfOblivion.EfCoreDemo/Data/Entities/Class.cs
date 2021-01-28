@@ -1,17 +1,18 @@
-﻿using System.Collections.Generic;
-
-namespace FearOfOblivion.EfCoreDemo.Data.Entities
+﻿namespace FearOfOblivion.EfCoreDemo.Data.Entities
 {
     public class Class
     {
-        protected Class()
+        private int? id;
+
+        protected Class() { }
+
+        public static Class Create(string name, Teacher teacher)
         {
-            // Required by EF as it cannot pass in a Teacher
-        }
-        public Class(string name, Teacher teacher)
-        {
-            Name = name;
-            Teacher = teacher;
+            return new Class
+            {
+                Name = name,
+                Teacher = teacher
+            };
         }
 
         public void ChangeTeacher(int teacherId)
@@ -20,10 +21,8 @@ namespace FearOfOblivion.EfCoreDemo.Data.Entities
             Teacher = null;
         }
 
-        public int Id { get; private set; }
         public string Name { get; private set; }
         public int TeacherId { get; private set; }
         public Teacher Teacher { get; private set; }
-        public IList<StudentClass> Students { get; private set; }
     }
 }

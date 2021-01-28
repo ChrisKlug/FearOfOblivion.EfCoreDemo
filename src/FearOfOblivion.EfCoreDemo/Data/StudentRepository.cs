@@ -1,5 +1,6 @@
 ﻿using FearOfOblivion.EfCoreDemo.Data.Entities;
 using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -7,41 +8,32 @@ namespace FearOfOblivion.EfCoreDemo.Data
 {
     public class StudentRepository
     {
-        private readonly SchoolContext context;
-
         public StudentRepository(SchoolContext context)
         {
-            this.context = context;
+            Students = context.Set<Student>().Include("classes.Class.Teacher");
         }
 
         public Task<Student> WithId(int id)
         {
-            return context.Set<Student>()
-                            .Include(x => x.Classes)
-                            .ThenInclude(x => x.Class)
-                            .ThenInclude(x => x.Teacher)
-                            .Where(x => x.Id == id)
-                            .SingleOrDefaultAsync();
+            return Students
+                        .Where(x => EF.Property<int>(x, "id") == id)
+                        .SingleOrDefaultAsync();
         }
 
         public Task<Student> WithStudentId(string studentId)
         {
-            return context.Set<Student>()
-                            .Include(x => x.Classes)
-                            .ThenInclude(x => x.Class)
-                            .ThenInclude(x => x.Teacher)
-                            .Where(x => x.StudentId == studentId)
-                            .SingleOrDefaultAsync();
+            return Students
+                        .Where(x => x.StudentId == studentId)
+                        .SingleOrDefaultAsync();
         }
 
         public Task<Student[]> InClass(string className)
         {
-            return context.Set<Student>()
-                            .Include(x => x.Classes)
-                            .ThenInclude(x => x.Class)
-                            .ThenInclude(x => x.Teacher)
-                            .Where(x => x.Classes.Any(x => x.Class.Name == className))
-                            .ToArrayAsync();
+            return Students
+                        .Where(x => EF.Property<List<StudentClass>>(x, "classes").Any(x => x.Class.Name == className))
+                        .ToArrayAsync();
         }
+
+        private IQueryable<Student> Students { get; }
     }
 }
