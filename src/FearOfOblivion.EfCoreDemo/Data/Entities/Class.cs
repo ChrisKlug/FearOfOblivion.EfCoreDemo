@@ -15,14 +15,12 @@
             };
         }
 
-        public void ChangeTeacher(int teacherId)
+        public void ChangeTeacher(Teacher teacher)
         {
-            TeacherId = teacherId;
-            Teacher = null;
+            Teacher = teacher;
         }
 
         public string Name { get; private set; }
-        public int TeacherId { get; private set; }
         public Teacher Teacher { get; private set; }
     }
 }
