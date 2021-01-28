@@ -10,7 +10,7 @@ namespace FearOfOblivion.EfCoreDemo.Data.Entities
 
         protected Student() { }
 
-        public static Student Create(string studentId, string firstName, string lastName)
+        public static Student Create(StudentId studentId, string firstName, string lastName)
         {
             return new Student
             {
@@ -25,7 +25,7 @@ namespace FearOfOblivion.EfCoreDemo.Data.Entities
             classes.Add(new StudentClass { Student = this, Class = @class });
         }
 
-        public string StudentId { get; private set; }
+        public StudentId StudentId { get; private set; }
         public string FirstName { get; private set; }
         public string LastName { get; private set; }
         public IReadOnlyList<Class> Classes => classes.Select(x => x.Class).ToList().AsReadOnly();

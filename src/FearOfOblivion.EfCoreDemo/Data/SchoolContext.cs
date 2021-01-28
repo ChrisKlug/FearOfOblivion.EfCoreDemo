@@ -22,6 +22,8 @@ namespace FearOfOblivion.EfCoreDemo.Data
 
             modelBuilder.Entity<Student>(x =>
             {
+                x.Property(x => x.StudentId).HasConversion(x => x.ToString(), x => new StudentId(x));
+
                 x.Property("id").HasColumnName("Id").UseIdentityColumn();
 
                 x.Ignore(x => x.Classes);

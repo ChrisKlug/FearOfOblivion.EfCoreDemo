@@ -21,7 +21,7 @@ namespace FearOfOblivion.EfCoreDemo.Tests.Extensions
             // multiple StudentClass instances without Ids set for either
             context.SaveChanges();
 
-            var chris = Student.Create("CK001", "Chris", "Klug");
+            var chris = Student.Create(new StudentId("CK001"), "Chris", "Klug");
             chris.AddClass(english);
             chris.AddClass(swedish);
 

@@ -51,7 +51,7 @@ namespace FearOfOblivion.EfCoreDemo.Tests
         [Fact]
         public async Task Can_get_student_by_student_id()
         {
-            var student = await students.WithStudentId("CK001");
+            var student = await students.WithStudentId(new StudentId("CK001"));
 
             ValidateStudent(student);
         }

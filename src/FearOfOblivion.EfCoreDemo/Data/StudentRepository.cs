@@ -20,7 +20,7 @@ namespace FearOfOblivion.EfCoreDemo.Data
                         .SingleOrDefaultAsync();
         }
 
-        public Task<Student> WithStudentId(string studentId)
+        public Task<Student> WithStudentId(StudentId studentId)
         {
             return Students
                         .Where(x => x.StudentId == studentId)
