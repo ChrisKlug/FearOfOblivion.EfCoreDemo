@@ -24,6 +24,7 @@ namespace FearOfOblivion.EfCoreDemo.Data.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Students", x => x.Id);
+                    table.UniqueConstraint("UQ_StudentId", x => x.StudentId);
                 });
 
             migrationBuilder.CreateTable(
