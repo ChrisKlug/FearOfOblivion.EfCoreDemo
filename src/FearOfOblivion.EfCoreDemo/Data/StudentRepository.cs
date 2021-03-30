@@ -16,7 +16,7 @@ namespace FearOfOblivion.EfCoreDemo.Data
 
         public Task<Student> WithId(int id)
         {
-            return context.Set<Student>()
+            return context.Students
                             .Include(x => x.Classes)
                             .ThenInclude(x => x.Class)
                             .ThenInclude(x => x.Teacher)
@@ -26,7 +26,7 @@ namespace FearOfOblivion.EfCoreDemo.Data
 
         public Task<Student> WithStudentId(string studentId)
         {
-            return context.Set<Student>()
+            return context.Students
                             .Include(x => x.Classes)
                             .ThenInclude(x => x.Class)
                             .ThenInclude(x => x.Teacher)
@@ -36,7 +36,7 @@ namespace FearOfOblivion.EfCoreDemo.Data
 
         public Task<Student[]> InClass(string className)
         {
-            return context.Set<Student>()
+            return context.Students
                             .Include(x => x.Classes)
                             .ThenInclude(x => x.Class)
                             .ThenInclude(x => x.Teacher)

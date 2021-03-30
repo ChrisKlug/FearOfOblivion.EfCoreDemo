@@ -46,5 +46,7 @@ namespace FearOfOblivion.EfCoreDemo.Data
                 x.ToTable("StudentClasses");
             });
         }
+
+        public DbSet<Student> Students { get; set; }
     }
 }
