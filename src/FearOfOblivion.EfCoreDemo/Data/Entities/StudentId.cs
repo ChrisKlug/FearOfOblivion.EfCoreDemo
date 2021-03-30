@@ -5,7 +5,7 @@ namespace FearOfOblivion.EfCoreDemo.Data.Entities
 {
     public struct StudentId
     {
-        private static Regex ValidationRegex = new Regex("[A-Z]{2}[0-9]{0}");
+        private static Regex ValidationRegex = new Regex("^[A-Z]{2}[0-9]{3}$");
         private string id;
 
         public StudentId(string id)
